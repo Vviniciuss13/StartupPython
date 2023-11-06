@@ -5,58 +5,54 @@ from classes import Candidato
 ### PESQUISA ######
 
 def abrirPesquisa():
-    janelaPesquisa = tk.Toplevel()
-    janelaPesquisa.geometry("500x350")
+    janelaPesquisa = tk.Tk()
+    janelaPesquisa.geometry("850x500")
+
 
     title = tk.Label(janelaPesquisa, text="Startup: Escolha dos Candidatos")
-    title.pack(pady=10)
+    title.pack()
 
     instrucao = tk.Label(janelaPesquisa, text="Escolha os Requisitos:")
-    instrucao.pack(pady=20)
+    instrucao.pack()
 
-    frameEntrevista = tk.Frame(janelaPesquisa, height=200, width=80)
-    frameTeorico = tk.Frame(janelaPesquisa, height=200, width=80)
-    framePratico = tk.Frame(janelaPesquisa, height=200, width=80)
-    frameSoftSkill = tk.Frame(janelaPesquisa, height=200, width=80)
+    frame = tk.Frame(janelaPesquisa)
 
     # Labels
-    entrevistaLabel = tk.Label(frameEntrevista, text="Nota Mínima da Entrevista: ")
-    entrevistaLabel.pack()
+    entrevistaLabel = tk.Label(frame, text="Nota Mínima da Entrevista: ")
+    entrevistaLabel.grid(column=0, row=2, pady=15)
 
-    teoricoLabel = tk.Label(frameTeorico, text="Nota Mínima da prova teorica: ")
-    teoricoLabel.pack()
+    teoricoLabel = tk.Label(frame, text="Nota Mínima da prova teorica: ")
+    teoricoLabel.grid(column=1, row=2)
 
-    praticoLabel = tk.Label(framePratico, text="Nota Mínima da prova pratica: ")
-    praticoLabel.pack()
+    praticoLabel = tk.Label(frame, text="Nota Mínima da prova pratica: ")
+    praticoLabel.grid(column=0, row=4)
 
-    softSkillLabel = tk.Label(frameSoftSkill, text="Nota Mínima sobre a SoftSkill: ")
-    softSkillLabel.pack()
+    softSkillLabel = tk.Label(frame, text="Nota Mínima sobre a SoftSkill: ")
+    softSkillLabel.grid(column=1, row=4)
 
     # INPUTS
-    entrevistaEntry = tk.Entry(frameEntrevista)
+    entrevistaEntry = tk.Entry(frame)
     entrevistaEntry.insert(0, "0")
-    entrevistaEntry.pack()
+    entrevistaEntry.grid(column=0, row=3, padx=10)
 
-    teoricoEntry = tk.Entry(frameTeorico)
+    teoricoEntry = tk.Entry(frame)
     teoricoEntry.insert(0, "0")
-    teoricoEntry.pack()
+    teoricoEntry.grid(column=1, row=3, padx=10)
 
-    praticoEntry = tk.Entry(framePratico)
+    praticoEntry = tk.Entry(frame)
     praticoEntry.insert(0, "0")
-    praticoEntry.pack()
+    praticoEntry.grid(column=0, row=5, padx=10)
 
-    softSkillEntry = tk.Entry(frameSoftSkill)
+    softSkillEntry = tk.Entry(frame)
     softSkillEntry.insert(0, "0")
-    softSkillEntry.pack()
-
-    frameEntrevista.pack()
-    frameTeorico.pack()
-    framePratico.pack()
-    frameSoftSkill.pack()
+    softSkillEntry.grid(column=1, row=5, padx=10)
 
     # BUTTON 
     buttonPesquisar = tk.Button(janelaPesquisa, text="Pesquisar Candidato", command=lambda: mostrarResultados(entrevistaEntry.get(), teoricoEntry.get(), praticoEntry.get(), softSkillEntry.get()))
-    buttonPesquisar.pack(pady=25)
+
+    frame.pack()
+
+    buttonPesquisar.pack(pady=20, ipadx=10, ipady=10)
 
 def mostrarResultados(entrevista, teorico, pratico, softSkill):
     janelaResultados = tk.Toplevel()
@@ -76,17 +72,88 @@ def mostrarResultados(entrevista, teorico, pratico, softSkill):
         avisoLabel = tk.Label(janelaResultados, text="Não há candidatos para essa vaga")
         avisoLabel.pack(pady=10)
 
+### INSERIR
+
+def abrirCadastro():
+    janelaInserir = tk.Toplevel()
+    janelaInserir.geometry("850x500")
+
+    title = tk.Label(janelaInserir, text="Startup: Cadastrar Usuário")
+    title.pack(pady=10)
+
+    instrucoes = tk.Label(janelaInserir, text="Informações: ")
+    instrucoes.pack(pady=10)
+
+    frame = tk.Frame(janelaInserir)
+
+    # Labels
+    nomeLabel = tk.Label(frame, text="Nome: ")
+    nomeLabel.grid(column=0, row=2, pady=15)
+
+    telefoneLabel = tk.Label(frame, text="Telefone: ")
+    telefoneLabel.grid(column=1, row=2)
+
+    minibioLabel = tk.Label(frame, text="MiniBio: ")
+    minibioLabel.grid(column=2, row=2)
+
+    entrevistaLabel = tk.Label(frame, text="Nota Mínima da Entrevista: ")
+    entrevistaLabel.grid(column=3, row=2, pady=15)
+
+    teoricoLabel = tk.Label(frame, text="Nota Mínima da prova teorica: ")
+    teoricoLabel.grid(column=0, row=4)
+
+    praticoLabel = tk.Label(frame, text="Nota Mínima da prova pratica: ")
+    praticoLabel.grid(column=1, row=4)
+
+    softSkillLabel = tk.Label(frame, text="Nota Mínima sobre a SoftSkill: ")
+    softSkillLabel.grid(column=2, row=4)
+
+    # INPUTS
+    nomeEntry = tk.Entry(frame)
+    nomeEntry.insert(0, "0")
+    nomeEntry.grid(column=0, row=3, padx=10)
+
+    telefoneEntry = tk.Entry(frame)
+    telefoneEntry.insert(0, "0")
+    telefoneEntry.grid(column=1, row=3, padx=10)
+
+    minibioEntry = tk.Entry(frame)
+    minibioEntry.insert(0, "0")
+    minibioEntry.grid(column=2, row=3, padx=10)
+
+    entrevistaEntry = tk.Entry(frame)
+    entrevistaEntry.insert(0, "0")
+    entrevistaEntry.grid(column=3, row=3, padx=10)
+
+    teoricoEntry = tk.Entry(frame)
+    teoricoEntry.insert(0, "0")
+    teoricoEntry.grid(column=0, row=5, padx=10)
+
+    praticoEntry = tk.Entry(frame)
+    praticoEntry.insert(0, "0")
+    praticoEntry.grid(column=1, row=5, padx=10)
+
+    softSkillEntry = tk.Entry(frame)
+    softSkillEntry.insert(0, "0")
+    softSkillEntry.grid(column=2, row=5, padx=10)
+
+    buttonInserir = tk.Button(frame, text="Inserir Candidato", command=lambda: print("oi"))
+    buttonInserir.grid(column=3, row=5, padx=10)
+
+    frame.pack()
+
+
 
 
 janela = tk.Tk()
-janela.geometry("500x350")
+janela.geometry("850x500")
 title = tk.Label(janela, text="Startup")
 title.pack(pady=10)
 
-buttonCadastrar = tk.Button(janela, text="Pesquisar Candidato", command=abrirPesquisa)
+buttonHomePesquisar = tk.Button(janela, text="Pesquisar Candidato", command=abrirPesquisa)
+buttonHomePesquisar.pack(pady=10)
+
+buttonCadastrar = tk.Button(janela, text="Cadastrar Candidato", command=abrirCadastro)
 buttonCadastrar.pack(pady=10)
-
-### INSERIR
-
 
 janela.mainloop()
