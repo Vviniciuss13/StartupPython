@@ -11,9 +11,9 @@ db_conexao = connection.MySQLConnection(host='localhost',
 def inserirCandidato(Candidato):
     cursor = db_conexao.cursor()
     
-    cursor.execute("INSERT INTO candidato VALUES(NULL, "+ Candidato.nome + ", "+ Candidato.telefone + ", "+ Candidato.minibio + 
-                   ", " + Candidato.getEntrevista() + ", " + Candidato.getTeorico() + ", " + Candidato.getPratico() + ", " 
-                   + Candidato.getSoftSkill() + ");")
+    cursor.execute("INSERT INTO candidato VALUES(NULL, '"+ Candidato.nome + "' , '"+ Candidato.telefone + "', '"+ Candidato.minibio + 
+                   "', " + Candidato.getEntrevista() + ", " + Candidato.getTeorico() + ", " + Candidato.getPratico() + ", " 
+                   + Candidato.getSkill() + ");")
     
     db_conexao.commit()
 

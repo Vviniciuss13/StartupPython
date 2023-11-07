@@ -1,13 +1,13 @@
 class Candidato():
     
-    def __init__(self, nome, telefone, minibio, entrevista, teorico, pratico, softskill):
+    def __init__(self, nome, telefone, minibio):
         self.nome = nome
         self.telefone = telefone
         self.minibio = minibio
-        self.__notaEntrevista = entrevista
-        self.__notaTeorico = teorico
-        self.__notaPratico = pratico
-        self.__notaSoftSkill = softskill
+        self.__notaEntrevista = 0
+        self.__notaTeorico = 0
+        self.__notaPratico = 0
+        self.__notaSoftSkill = 0
     
     def getEntrevista(self):
         return self.__notaEntrevista
