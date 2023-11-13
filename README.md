@@ -18,6 +18,6 @@ O programa deverá ser capaz de gerar dois tipos de relatórios em PDF:
 
 O primeiro completo com todos os dados;
 	
-O segundo resumido mostrando somente o nome e as notas do candidato. 
+O segundo resumido mostrando somente o nome e as notas do candidato.
 
 A entrega será a partir de um link para o github.
