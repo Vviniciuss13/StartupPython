@@ -1,9 +1,29 @@
 import bd
 import tkinter as tk
 from classes import Candidato
+from reportlab.pdfgen.canvas import Canvas
+
+def gerarPdf(candidatos):
+    x = 800
+    canvas = Canvas("candidatospesquisados.pdf")
+    for candidato in candidatos:
+        canvas.drawString(100, x, "ID: " + str(candidato[0]))
+        canvas.drawString(100, (x-10), "Nome: " + str(candidato[1]))
+        canvas.drawString(100, (x-20), "Telefone: " + str(candidato[2]))
+        canvas.drawString(100, (x-30), "MiniBio: " + str(candidato[3]))
+        canvas.drawString(100, (x-40), "Nota de Entrevista: " + str(candidato[4]))
+        canvas.drawString(100, (x-50), "Nota prova teorica: " + str(candidato[5]))
+        canvas.drawString(100, (x-60), "Nota prova pratica: " + str(candidato[6]))
+        canvas.drawString(100, (x-70), "Nota de SoftSkill: " + str(candidato[7]))
+        x = x - 120
+    canvas.save()
+
+def gerarPdfTodos():
+    canvas = Canvas("hello.pdf")
+    canvas.drawString(100, 800, "Hello, World!")
+    canvas.save()
 
 ### PESQUISA ######
-
 def abrirPesquisa():
     janelaPesquisa = tk.Tk()
     janelaPesquisa.geometry("850x500")
@@ -79,6 +99,8 @@ def mostrarResultados(notas):
 
     listCandidatos = tk.Listbox(janelaResultados, yscrollcommand=scrollbar.set, bg="#5EACB2", border=0, fg="#fff", font=("", 20, ""))
 
+    allCandidatos = bd.exibirTodos()
+
     candidatos = bd.pesquisarCandidato(notas[0], notas[1], notas[2], notas[3])
     for candidato in candidatos:
 
@@ -93,8 +115,17 @@ def mostrarResultados(notas):
         listCandidatos.insert("end", "-------------------------------")
 
     listCandidatos.pack(side="top", pady=15, ipady=15, ipadx=50)
-
+    
     scrollbar.config(command=listCandidatos.yview)
 
+    framePdf = tk.Frame(janelaResultados)
 
-        
+    buttonPdfAll = tk.Button(framePdf, text="gerar pdf com todos os Candidatos", command=lambda: gerarPdfTodos(allCandidatos))
+    buttonPdfAll.configure(bg='#CF9A32', fg='#fff', border=0)
+    buttonPdfAll.grid(column="0", row="0", padx=30, pady=10, ipadx=40, ipady=30)
+
+    buttonPdf = tk.Button(framePdf, text="gerar pdf com os candidatos pesquisados", command=lambda: gerarPdf(candidato))
+    buttonPdf.configure(bg='#CF9A32', fg='#fff', border=0)
+    buttonPdf.grid(column="1", row="0", padx=30, pady=10, ipadx=40, ipady=30)
+
+    framePdf.pack()

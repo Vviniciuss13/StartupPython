@@ -23,3 +23,10 @@ def pesquisarCandidato(entrevista, teorico, pratico, softSkill):
     cursor.execute("SELECT * FROM candidato WHERE entrevista > " + entrevista + " AND teorico > " + teorico + " AND pratico > " + pratico + " AND softSkill > " + softSkill)
 
     return cursor.fetchall()
+
+def exibirTodos():
+    cursor = db_conexao.cursor()
+
+    cursor.execute("SELECT * FROM candidato")
+
+    return cursor.fetchall()

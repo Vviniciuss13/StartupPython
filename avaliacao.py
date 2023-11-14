@@ -3,8 +3,6 @@ import bd
 from classes import Candidato
 import telaCadastro as cadastro
 import telaPesquisa as pesquisa
-import aspose.pdf as ap
-import aspose.pdf as ap
 
 def enterCadastrar(e):
     buttonCadastrar['background'] = "#315F21"
@@ -17,19 +15,6 @@ def enterPesquisar(o):
 
 def outPesquisar(o):
     buttonHomePesquisar['background'] = "#2A3D7E"
-
-def enterPdf(o):
-    buttonPdf['background'] = "#1D2A57"
-
-def outPdf(o):
-    buttonPdf['background'] = "#A67C28"
-
-def gerarPdf():
-    document = ap.Document()
-    page = document.pages.add()
-    text_fragment = ap.text.TextFragment("Hello,world!")
-    page.paragraphs.add(text_fragment)
-    document.save("output.pdf")
 
 janela = tk.Tk()
 janela.geometry("850x500")
@@ -53,12 +38,5 @@ buttonCadastrar.bind("<Enter>", enterCadastrar)
 buttonCadastrar.bind("<Leave>", outCadastrar)
 
 frame.pack()
-
-buttonPdf = tk.Button(janela, text="gerar pdf", command=gerarPdf)
-buttonPdf.configure(bg='#CF9A32', fg='#fff', border=0)
-
-buttonPdf.pack(padx=30, pady=10, ipadx=40, ipady=30)
-buttonPdf.bind("<Enter>", enterPdf)
-buttonPdf.bind("<Leave>", outPdf)
 
 janela.mainloop()
