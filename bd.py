@@ -4,23 +4,26 @@ from classes import Candidato
 
 db_conexao = connection.MySQLConnection(host='localhost',
                                         user='root',
-                                        password='',
+                                        password='187239',
                                         database='startup_av')    
 
 
 def inserirCandidato(Candidato):
     cursor = db_conexao.cursor()
     
-    cursor.execute("INSERT INTO candidato VALUES(NULL, '"+ Candidato.nome + "' , '"+ Candidato.telefone + "', '"+ Candidato.minibio + 
+    try:
+        cursor.execute("INSERT INTO candidato VALUES(NULL, '"+ Candidato.nome + "' , '"+ Candidato.telefone + "', '"+ Candidato.minibio + 
                    "', " + Candidato.getEntrevista() + ", " + Candidato.getTeorico() + ", " + Candidato.getPratico() + ", " 
                    + Candidato.getSkill() + ");")
-    
+        return True
+    except:
+        return False
     db_conexao.commit()
 
 def pesquisarCandidato(entrevista, teorico, pratico, softSkill):
     cursor = db_conexao.cursor()
 
-    cursor.execute("SELECT * FROM candidato WHERE entrevista > " + entrevista + " AND teorico > " + teorico + " AND pratico > " + pratico + " AND softSkill > " + softSkill)
+    cursor.execute("SELECT * FROM candidato WHERE entrevista >= " + entrevista + " AND teorico >= " + teorico + " AND pratico >= " + pratico + " AND softSkill >= " + softSkill)
 
     return cursor.fetchall()
 

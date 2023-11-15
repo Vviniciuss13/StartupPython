@@ -3,24 +3,102 @@ import tkinter as tk
 from classes import Candidato
 from reportlab.pdfgen.canvas import Canvas
 
-def gerarPdf(candidatos):
-    x = 800
+def gerarPdfInfo(candidatos):
+    x = 750
+    y = 100
     canvas = Canvas("candidatospesquisados.pdf")
+    canvas.drawString(200, 800, "Feito por Carlos Vinícius - Candidatos Filtrados - Todas as Informações")
     for candidato in candidatos:
-        canvas.drawString(100, x, "ID: " + str(candidato[0]))
-        canvas.drawString(100, (x-10), "Nome: " + str(candidato[1]))
-        canvas.drawString(100, (x-20), "Telefone: " + str(candidato[2]))
-        canvas.drawString(100, (x-30), "MiniBio: " + str(candidato[3]))
-        canvas.drawString(100, (x-40), "Nota de Entrevista: " + str(candidato[4]))
-        canvas.drawString(100, (x-50), "Nota prova teorica: " + str(candidato[5]))
-        canvas.drawString(100, (x-60), "Nota prova pratica: " + str(candidato[6]))
-        canvas.drawString(100, (x-70), "Nota de SoftSkill: " + str(candidato[7]))
+        canvas.drawString(y, x, "ID: " + str(candidato[0]))
+        canvas.drawString(y, (x-10), "Nome: " + candidato[1])
+        canvas.drawString(y, (x-20), "Telefone: " + candidato[2])
+        canvas.drawString(y, (x-30), "MiniBio: " + candidato[3])
+        canvas.drawString(y, (x-40), "Nota de Entrevista: " + str(candidato[4]))
+        canvas.drawString(y, (x-50), "Nota prova teorica: " + str(candidato[5]))
+        canvas.drawString(y, (x-60), "Nota prova pratica: " + str(candidato[6]))
+        canvas.drawString(y, (x-70), "Nota de SoftSkill: " + str(candidato[7]))
         x = x - 120
+        
+        if(x < 100 and y > 100):
+            canvas.showPage()
+            x = 750
+            y = 100
+        
+        if(x < 100):
+            y = 300
+            x = 750
+    canvas.save()
+    
+def gerarPdf(candidatos):
+    x = 750
+    y = 100
+    canvas = Canvas("candidatospesquisadosbasico.pdf")
+    canvas.drawString(200, 800, "Feito por Carlos Vinícius - Candidatos Filtrados - Informações Básicas")
+    for candidato in candidatos:
+        canvas.drawString(y, (x-10), "Nome: " + candidato[1])
+        canvas.drawString(y, (x-20), "Nota de Entrevista: " + str(candidato[4]))
+        canvas.drawString(y, (x-30), "Nota prova teorica: " + str(candidato[5]))
+        canvas.drawString(y, (x-40), "Nota prova pratica: " + str(candidato[6]))
+        canvas.drawString(y, (x-50), "Nota de SoftSkill: " + str(candidato[7]))
+        x = x - 90
+        
+        if(x < 100 and y > 100):
+            canvas.showPage()
+            x = 750
+            y = 100
+        
+        if(x < 100):
+            y = 300
+            x = 750
     canvas.save()
 
-def gerarPdfTodos():
-    canvas = Canvas("hello.pdf")
-    canvas.drawString(100, 800, "Hello, World!")
+def gerarPdfTodosInfo(candidatos):
+    x = 750
+    y = 100
+    canvas = Canvas("candidatosinformacoes.pdf")
+    canvas.drawString(200, 800, "Feito por Carlos Vinícius - Todos os Candidatos - Todas informações")
+    for candidato in candidatos:
+        canvas.drawString(y, x, "ID: " + str(candidato[0]))
+        canvas.drawString(y, (x-10), "Nome: " + candidato[1])
+        canvas.drawString(y, (x-20), "Telefone: " + candidato[2])
+        canvas.drawString(y, (x-30), "MiniBio: " + candidato[3])
+        canvas.drawString(y, (x-40), "Nota de Entrevista: " + str(candidato[4]))
+        canvas.drawString(y, (x-50), "Nota prova teorica: " + str(candidato[5]))
+        canvas.drawString(y, (x-60), "Nota prova pratica: " + str(candidato[6]))
+        canvas.drawString(y, (x-70), "Nota de SoftSkill: " + str(candidato[7]))
+        x = x - 120
+        
+        if(x < 100 and y > 100):
+            canvas.showPage()
+            x = 750
+            y = 100
+        
+        if(x < 100):
+            y = 300
+            x = 750
+    canvas.save()
+    
+def gerarPdfTodos(candidatos):
+    x = 750
+    y = 100
+    canvas = Canvas("candidatosbasico.pdf")
+    canvas.drawString(200, 800, "Feito por Carlos Vinícius - Todos os Candidatos - Informações Basicas")
+    for candidato in candidatos:
+        canvas.drawString(y, (x-10), "Nome: " + candidato[1])
+        canvas.drawString(y, (x-20), "Nota de Entrevista: " + str(candidato[4]))
+        canvas.drawString(y, (x-30), "Nota prova teorica: " + str(candidato[5]))
+        canvas.drawString(y, (x-40), "Nota prova pratica: " + str(candidato[6]))
+        canvas.drawString(y, (x-50), "Nota de SoftSkill: " + str(candidato[7]))
+        x = x - 90
+        
+        if(x < 100 and y > 100):
+            canvas.showPage()
+            x = 750
+            y = 100
+        
+        if(x < 100):
+            y = 300
+            x = 750
     canvas.save()
 
 ### PESQUISA ######
@@ -91,7 +169,7 @@ def pesquisar(entrevista, teorico, pratico, softSkill):
 
 def mostrarResultados(notas):
     janelaResultados = tk.Tk()
-    janelaResultados.geometry("850x500")
+    janelaResultados.geometry("850x600")
     janelaResultados.config(bg="#7EACB2")
 
     scrollbar = tk.Scrollbar(janelaResultados)
@@ -118,14 +196,22 @@ def mostrarResultados(notas):
     
     scrollbar.config(command=listCandidatos.yview)
 
-    framePdf = tk.Frame(janelaResultados)
+    framePdf = tk.Frame(janelaResultados, bg="#7EACB2")
 
-    buttonPdfAll = tk.Button(framePdf, text="gerar pdf com todos os Candidatos", command=lambda: gerarPdfTodos(allCandidatos))
-    buttonPdfAll.configure(bg='#CF9A32', fg='#fff', border=0)
-    buttonPdfAll.grid(column="0", row="0", padx=30, pady=10, ipadx=40, ipady=30)
+    buttonPdfAll = tk.Button(framePdf, text="gerar pdf com informações basicas de todos os Candidatos", command=lambda: gerarPdfTodos(allCandidatos))
+    buttonPdfAll.configure(bg='#2A3D7E', fg='#fff', border=0)
+    buttonPdfAll.grid(column="0", row="0", padx=20, pady=10, ipadx=20, ipady=20)
+    
+    buttonPdfAllInfo = tk.Button(framePdf, text="gerar pdf com todas informações de todos os Candidatos", command=lambda: gerarPdfTodosInfo(allCandidatos))
+    buttonPdfAllInfo.configure(bg='#2A3D7E', fg='#fff', border=0)
+    buttonPdfAllInfo.grid(column="1", row="0", padx=20, pady=10, ipadx=20, ipady=20)
 
-    buttonPdf = tk.Button(framePdf, text="gerar pdf com os candidatos pesquisados", command=lambda: gerarPdf(candidato))
+    buttonPdf = tk.Button(framePdf, text="gerar pdf com informações basicas dos candidatos pesquisados", command=lambda: gerarPdf(candidatos))
     buttonPdf.configure(bg='#CF9A32', fg='#fff', border=0)
-    buttonPdf.grid(column="1", row="0", padx=30, pady=10, ipadx=40, ipady=30)
+    buttonPdf.grid(column="0", row="1", padx=20, pady=10, ipadx=20, ipady=20)
+    
+    buttonPdfInfo = tk.Button(framePdf, text="gerar pdf com todas as informações dos candidatos pesquisados", command=lambda: gerarPdfInfo(candidatos))
+    buttonPdfInfo.configure(bg='#CF9A32', fg='#fff', border=0)
+    buttonPdfInfo.grid(column="1", row="1", padx=20, pady=10, ipadx=20, ipady=20)
 
     framePdf.pack()
