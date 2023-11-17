@@ -1,20 +1,22 @@
 import tkinter as tk
-import bd
-from classes import Candidato
 import telaCadastro as cadastro
 import telaPesquisa as pesquisa
+import sys
+sys.path.append('./')
+import functions as f
 
+#ENTERS AND OUT HOVER
 def enterCadastrar(e):
-    buttonCadastrar['background'] = "#315F21"
-
+    buttonCadastrar.configure(bg="#315F21")
+    
 def outCadastrar(o):
-    buttonCadastrar['background'] = "#3D712A"
-
-def enterPesquisar(o):
-    buttonHomePesquisar['background'] = "#1D2A57"
-
+    buttonCadastrar.configure(bg="#3D712A")
+    
+def enterPesquisar(e):
+    buttonHomePesquisar.configure(bg="#1D2A57")
+    
 def outPesquisar(o):
-    buttonHomePesquisar['background'] = "#2A3D7E"
+    buttonHomePesquisar.configure(bg="#2A3D7E")
 
 janela = tk.Tk()
 janela.geometry("850x500")

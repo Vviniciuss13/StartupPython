@@ -2,15 +2,16 @@
 from mysql.connector import (connection)
 from classes import Candidato
 
+#DATABASE CONEXÃO
 db_conexao = connection.MySQLConnection(host='localhost',
                                         user='root',
-                                        password='187239',
+                                        password='',
                                         database='startup_av')    
 
 
+#INSERIR CANDIDATO
 def inserirCandidato(Candidato):
     cursor = db_conexao.cursor()
-    
     try:
         cursor.execute("INSERT INTO candidato VALUES(NULL, '"+ Candidato.nome + "' , '"+ Candidato.telefone + "', '"+ Candidato.minibio + 
                    "', " + Candidato.getEntrevista() + ", " + Candidato.getTeorico() + ", " + Candidato.getPratico() + ", " 
@@ -20,6 +21,7 @@ def inserirCandidato(Candidato):
         return False
     db_conexao.commit()
 
+#PESQUISAR CANDIDATO PELAS NOTAS
 def pesquisarCandidato(entrevista, teorico, pratico, softSkill):
     cursor = db_conexao.cursor()
 
@@ -27,6 +29,7 @@ def pesquisarCandidato(entrevista, teorico, pratico, softSkill):
 
     return cursor.fetchall()
 
+#EXIBIR TODOS OS CANDIDATOS
 def exibirTodos():
     cursor = db_conexao.cursor()
 

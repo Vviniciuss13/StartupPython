@@ -21,3 +21,11 @@ O primeiro completo com todos os dados;
 O segundo resumido mostrando somente o nome e as notas do candidato.
 
 A entrega será a partir de um link para o github.
+
+## Dependências
+pip install mysql-connector-python
+pip install reportlab
+tkinter
+
+## Banco de Dados na pasta db
+### Database name startup_av
